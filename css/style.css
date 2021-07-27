@@ -1,3 +1,61 @@
 body {
-    background-color: rgb(238, 249, 191);
+    background: rgb(238, 249, 191);
+    font-family: 'Roboto', sans-serif;
+}
+
+.titulo {
+    margin-top: 50px;
+    font-size: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: rgb(117, 183, 158);
+}
+
+.cards {
+    width: 80%;
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 117px;
+    height: 146px;
+    margin: 0 34px 34px 0;
+    background: rgb(167, 233, 175);
+    border: solid 1px rgb(117, 183, 158);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.front-parrot {
+    width: 100px;
+    height: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 700px) {
+    .titulo {
+        font-size: 50px;
+    }
+}
+@media(max-width: 500px) {
+    .titulo {
+        font-size: 30px;
+    }
 }
