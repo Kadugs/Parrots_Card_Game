@@ -12,7 +12,7 @@ body {
     color: rgb(117, 183, 158);
 }
 
-.cards {
+.baralho {
     width: 80%;
     margin: 40px auto;
     display: flex;
@@ -30,11 +30,35 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transform-style: preserve-3d;
+    position: relative;
+    transition: all .5s;
+}
+.card:hover {
+    cursor: pointer;
+}
+
+.simbolo-carta {
+    display: flex;
+    width: 90px;
+}
+.card-clicado{
+
+    transform: rotateY(180deg); 
+}
+.simbolo-carta{
+    transform: rotateY(-180deg); 
+    position: absolute;
 }
 .front-parrot {
     width: 100px;
     height: 100px;
+    backface-visibility: hidden;
+
 }
+/* .escondido {
+    display: none;
+} */
 
 
 
@@ -46,7 +70,9 @@ body {
 
 
 
-
+.card:active {
+    transform: rotateY(180deg);
+}
 
 
 @media(max-width: 700px) {
