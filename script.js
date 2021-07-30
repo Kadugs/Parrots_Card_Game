@@ -15,30 +15,49 @@ while(numCartas < 4 || numCartas > 14 || numCartas % 2 !== 0 || !numCartas) {
 for(let i = 0; i < numCartas / 2; i++) {
     for(let j = 0; j < 2; j++) {
         cards.push(`<div class="${parrotCards[i]} card" onclick="vira(this);"> <img src="src/front.png" class="front-parrot"> <img src="/src/${parrotCards[i]}.gif" class="simbolo-carta"></div>`);
-        
     }
 }
 cards.sort(randomizer);
 for(let i = 0; i < numCartas; i++) {
     baralho.innerHTML += cards[i];
-    console.log(cards.length)
 }
 function randomizer() {
     return Math.random() -0.5 ;
 }
+
 let cartaClicada;
 function vira(elemento) {
-    elemento.classList.add("card-clicado");
-    if(!cartaClicada) {
+    if(!cartaClicada && elemento.classList.contains("acertou") === false) {
+        elemento.classList.add("card-clicado");
         cartaClicada = elemento;
-    } else if (elemento.classList.item(0) === cartaClicada.classList.item(0)) {
-        cartaClicada.classList.add("acertou");
-        elemento.classList.add("acertou");
-        elemento.classList.remove("card-clicado");
-        cartaClicada = undefined;
     } else {
+        if (elemento.classList.item(0) === cartaClicada.classList.item(0) && cartaClicada !== elemento && elemento.classList.contains("acertou") === false) {
+            cartaClicada.classList.add("acertou");
+            elemento.classList.add("acertou");
+        } else {
+            elemento.classList.add("card-clicado");
+            setTimeout(removeErro, 1000);
+        }
+        setTimeout(resetaClasses, 1000);  
+    }
+    function removeErro() {
         elemento.classList.add("errou");
-        elemento.classList.remove("errou");
+        console.log("a")
+    }
+    function resetaClasses() {
         elemento.classList.remove("card-clicado");
+        cartaClicada.classList.remove("card-clicado");
+        cartaClicada = undefined;
+        elemento.classList.remove("errou");
+    }
+    contador++;
+    verificaVitoria();
+}
+
+function verificaVitoria() {
+    const numAcertos = document.querySelectorAll(".acertou");
+    if(numAcertos.length === numCartas) {
+        alert(`Você ganhou em ${contador / 2} jogadas!`);
     }
 }
+

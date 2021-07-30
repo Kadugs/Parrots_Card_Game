@@ -36,21 +36,20 @@ body {
     transform-style: preserve-3d;
     position: relative;
     transition: all .5s;
+    user-select: none;
 }
 .card:hover {
     cursor: pointer;
 }
 
-.simbolo-carta {
-    display: flex;
-    width: 90px;
-}
 .card-clicado {
     transform: rotateY(180deg);
 }
 .simbolo-carta{
     transform: rotateY(-180deg); 
     position: absolute;
+    display: flex;
+    width: 90px;
 }
 .front-parrot {
     width: 100px;
@@ -59,17 +58,10 @@ body {
 }
 .errou {
     transform: rotateY(0deg);
-}   
+}
 .acertou {
     transform: rotateY(180deg);
 }
-
-
-
-
-
-
-
 
 
 .card:active {
