@@ -3,15 +3,14 @@ const baralho = document.querySelector(".baralho");
 const cards = [];
 const tiposCartas = [];
 let contador = 0;
+let intervaloTimer;
 const parrotCards = [`bobrossparrot`, `explodyparrot`, `fiestaparrot`,
 `metalparrot`,`revertitparrot`, `tripletsparrot`,`unicornparrot`];
-    
+   
 while(numCartas < 4 || numCartas > 14 || numCartas % 2 !== 0 || !numCartas) {
-    // numCartas = prompt("Quantas cartas quer jogar?");
-    numCartas = 8;
-    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA LEMBRAR DE ALTERAR ISSO PELO AMOR DE DEUS 
-    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    numCartas = prompt("Quantas cartas quer jogar?");
 }
+temporizador();
 for(let i = 0; i < numCartas / 2; i++) {
     for(let j = 0; j < 2; j++) {
         cards.push(`<div class="${parrotCards[i]} card" onclick="vira(this);"> <img src="src/front.png" class="front-parrot"> <img src="/src/${parrotCards[i]}.gif" class="simbolo-carta"></div>`);
@@ -42,7 +41,6 @@ function vira(elemento) {
     }
     function removeErro() {
         elemento.classList.add("errou");
-        console.log("a")
     }
     function resetaClasses() {
         elemento.classList.remove("card-clicado");
@@ -54,10 +52,31 @@ function vira(elemento) {
     verificaVitoria();
 }
 
+let timer = 0;
+
+function temporizador() {
+    intervaloTimer = setInterval(somaTempo, 1000);
+}
+
+
+function somaTempo() {
+    const relogio = document.querySelector(".tempo");
+    relogio.innerHTML = timer;
+    timer++;
+}
+
 function verificaVitoria() {
     const numAcertos = document.querySelectorAll(".acertou");
-    if(numAcertos.length === numCartas) {
-        alert(`Você ganhou em ${contador / 2} jogadas!`);
+    console.log(numCartas)
+    console.log(numAcertos.length)
+    if(numAcertos.length === Number(numCartas)) {
+        clearInterval(intervaloTimer);
+        setTimeout(alertaVitoria, 1000);
     }
 }
+
+function alertaVitoria() {
+    alert(`Você ganhou em ${timer} segundos com ${contador / 2} jogadas!`)
+}
+
 

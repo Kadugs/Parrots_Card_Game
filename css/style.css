@@ -5,9 +5,26 @@ body {
     background: rgb(238, 249, 191);
     font-family: 'Roboto', sans-serif;
 }
-
+.container-tempo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.conta-tempo {
+    text-align: center;
+    background-color: rgb(167, 233, 175);
+    border: solid 1px rgb(95, 151, 130);
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    height: 60px;
+    width: 100px;
+    color: rgb(95, 151, 130);
+}
+.tempo {
+    font-size: 30px;
+}
 .titulo {
-    margin-top: 50px;
+    margin-top: 40px;
     font-size: 70px;
     width: 100%;
     display: flex;
