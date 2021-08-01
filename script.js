@@ -8,8 +8,7 @@ const parrotCards = [`bobrossparrot`, `explodyparrot`, `fiestaparrot`,
 `metalparrot`,`revertitparrot`, `tripletsparrot`,`unicornparrot`];
    
 while(numCartas < 4 || numCartas > 14 || numCartas % 2 !== 0 || !numCartas) {
-    //numCartas = prompt("Quantas cartas quer jogar?");
-    numCartas = 8;
+    numCartas = prompt("Quantas cartas quer jogar?");
 }
 temporizador();
 for(let i = 0; i < numCartas / 2; i++) {
@@ -25,38 +24,43 @@ function randomizer() {
     return Math.random() -0.5 ;
 }
 
-let cartaClicada;
+const cartaClicada = [];
 function vira(elemento) {
-    if(!cartaClicada && elemento.classList.contains("acertou") === false) {
+    if (cartaClicada[0] !== undefined && cartaClicada[1] !== undefined) {
+        contador--;
+    } else if(!cartaClicada[0] && elemento.classList.contains("acertou") === false) {
         elemento.classList.add("card-clicado");
-        cartaClicada = elemento;
+        cartaClicada[0] = elemento;
     } else {
-        if (elemento.classList.item(0) === cartaClicada.classList.item(0) &&
-         cartaClicada !== elemento &&
-         elemento.classList.contains("acertou") === false) {
-            cartaClicada.classList.add("acertou");
-            elemento.classList.add("acertou");
+        cartaClicada[1] = elemento;
+        if (cartaClicada[1].classList.item(0) === cartaClicada[0].classList.item(0) &&
+        cartaClicada[0] !== cartaClicada[1] &&
+        cartaClicada[1].classList.contains("acertou") === false) 
+        {
+            cartaClicada[0].classList.add("acertou");
+            cartaClicada[1].classList.add("acertou");
+            setTimeout(resetaClasses, 1000);  
         } else {
-            elemento.classList.add("card-clicado");
+            cartaClicada[1].classList.add("card-clicado");
             setTimeout(adicionaErro, 1000);
+            setTimeout(resetaClasses, 1000);  
         }
-        setTimeout(resetaClasses, 1000);  
     }
     function adicionaErro() {
-        elemento.classList.add("errou");
+        cartaClicada[1].classList.add("errou");
     }
     function resetaClasses() {
-        elemento.classList.remove("card-clicado");
-        cartaClicada.classList.remove("card-clicado");
-        cartaClicada = undefined;
-        errou = undefined;
-        elemento.classList.remove("errou");
+        cartaClicada[0].classList.remove("card-clicado");
+        cartaClicada[1].classList.remove("card-clicado");
+        cartaClicada[1].classList.remove("errou");
+        cartaClicada[0] = undefined;
+        cartaClicada[1] = undefined;
     }
     contador++;
     verificaVitoria();
 }
 
-let timer = 0;
+let timer = 1;
 
 function temporizador() {
     intervaloTimer = setInterval(somaTempo, 1000);
@@ -81,7 +85,7 @@ function alertaVitoria() {
     const telaVitoria = document.querySelector(".container-tela-vitoria");
     const textoVitoria = document.querySelector(".texto-vitoria");
     telaVitoria.style.display = 'flex';
-    textoVitoria.innerHTML = `Você ganhou em ${timer} segundos com ${contador} jogadas!`;
+    textoVitoria.innerHTML = `Você ganhou em ${timer - 1} segundos com ${contador} jogadas!`;
 }
 
 
