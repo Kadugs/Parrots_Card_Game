@@ -8,7 +8,8 @@ const parrotCards = [`bobrossparrot`, `explodyparrot`, `fiestaparrot`,
 `metalparrot`,`revertitparrot`, `tripletsparrot`,`unicornparrot`];
    
 while(numCartas < 4 || numCartas > 14 || numCartas % 2 !== 0 || !numCartas) {
-    numCartas = prompt("Quantas cartas quer jogar?");
+    //numCartas = prompt("Quantas cartas quer jogar?");
+    numCartas = 8;
 }
 temporizador();
 for(let i = 0; i < numCartas / 2; i++) {
@@ -30,22 +31,25 @@ function vira(elemento) {
         elemento.classList.add("card-clicado");
         cartaClicada = elemento;
     } else {
-        if (elemento.classList.item(0) === cartaClicada.classList.item(0) && cartaClicada !== elemento && elemento.classList.contains("acertou") === false) {
+        if (elemento.classList.item(0) === cartaClicada.classList.item(0) &&
+         cartaClicada !== elemento &&
+         elemento.classList.contains("acertou") === false) {
             cartaClicada.classList.add("acertou");
             elemento.classList.add("acertou");
         } else {
             elemento.classList.add("card-clicado");
-            setTimeout(removeErro, 1000);
+            setTimeout(adicionaErro, 1000);
         }
         setTimeout(resetaClasses, 1000);  
     }
-    function removeErro() {
+    function adicionaErro() {
         elemento.classList.add("errou");
     }
     function resetaClasses() {
         elemento.classList.remove("card-clicado");
         cartaClicada.classList.remove("card-clicado");
         cartaClicada = undefined;
+        errou = undefined;
         elemento.classList.remove("errou");
     }
     contador++;
@@ -67,8 +71,6 @@ function somaTempo() {
 
 function verificaVitoria() {
     const numAcertos = document.querySelectorAll(".acertou");
-    console.log(numCartas)
-    console.log(numAcertos.length)
     if(numAcertos.length === Number(numCartas)) {
         clearInterval(intervaloTimer);
         setTimeout(alertaVitoria, 1000);
@@ -76,7 +78,10 @@ function verificaVitoria() {
 }
 
 function alertaVitoria() {
-    alert(`Você ganhou em ${timer} segundos com ${contador / 2} jogadas!`)
+    const telaVitoria = document.querySelector(".container-tela-vitoria");
+    const textoVitoria = document.querySelector(".texto-vitoria");
+    telaVitoria.style.display = 'flex';
+    textoVitoria.innerHTML = `Você ganhou em ${timer} segundos com ${contador} jogadas!`;
 }
 
 
