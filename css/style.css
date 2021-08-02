@@ -158,10 +158,19 @@ body {
         font-size: 30px;
     }
     .botoes div {
-        width: 100px;
+        width: 110px;
     }
     .tela-vitoria {
         width: 90vw;
-        height: 400px;
+        height: 360px;
+    }
+    .botao-sim {
+        left: 30px;
+    }
+    .botao-nao {
+        right: 30px;
+    }
+    .texto-vitoria {
+        margin-bottom: 900px;
     }
 }
